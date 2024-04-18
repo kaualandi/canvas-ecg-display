@@ -1,13 +1,13 @@
 /**
  * CANVAS ECG DISPLAY
  * Experimentation with canvas - an attempt to produce something meaningful with it.
- * 
+ *
  * Author: Samuli Puolakka / @smappaa on GitHub
  * Date: March 31st to April 5th 2024
  * License: MIT
  */
 
-class Ecg {
+class Ecg_ {
   lineX = 0;
   lineY = 0;
   prevYpos = 100;
@@ -22,45 +22,45 @@ class Ecg {
   hr = 60;
   lastHeartBeatTime = Date.now() / 1000;
   drawingComplex = false;
-  complexParts = [];
+  complexParts: number[] = [];
   currentComplexStep = 0;
   prevComplexDrawTime = 0;
   yGlide = 100;
 
-  constructor() {
+  constructor() {}
 
-  }
-
-  setRhythm(rhythm) {
+  setRhythm(rhythm: string) {
     this.rhythm = rhythm;
   }
 
-  setBaselineWander(baselineWanderOn) {
+  setBaselineWander(baselineWanderOn: boolean) {
     this.baselineWanderOn = baselineWanderOn;
   }
 
-  setTension(tension) {
+  setTension(tension: boolean) {
     this.tension = tension;
   }
 
-  setRattling(rattling) {
+  setRattling(rattling: boolean) {
     this.rattling = rattling;
   }
 
-  setHr(hr) {
+  setHr(hr: number) {
     this.hr = hr;
   }
 
   update() {
-    if (this.lineX >= canvas.width) {
+    if (canvas && this.lineX >= canvas.width) {
       this.lineX = 0;
     } else {
       this.lineX += 2;
     }
 
     let timeNow = Date.now() / 1000;
-    if (timeNow - this.lastHeartBeatTime > (60 / this.hr)
-      || this.rhythm == "afib" && Math.random() * 100 > 99) {
+    if (
+      timeNow - this.lastHeartBeatTime > 60 / this.hr ||
+      (this.rhythm == "afib" && Math.random() * 100 > 99)
+    ) {
       this.drawingComplex = true;
       this.complexParts = [];
       this.currentComplexStep = 0;
@@ -86,7 +86,7 @@ class Ecg {
         y += this.computeBaselineWander();
       }
 
-      if (this.yGlide < 120) this.yGlide += .05;
+      if (this.yGlide < 120) this.yGlide += 0.05;
     } else this.yGlide = 100;
 
     y += this.lineY;
@@ -99,21 +99,54 @@ class Ecg {
     let toReturn = 0;
     if (this.complexParts.length == 0) {
       switch (this.rhythm) {
-        case "sinus": this.complexParts = [-1, -4, -7, -4, 0, 0, 0, 1, -55, 3, 1, 0, 0, 0, -3, -5, -7, -7, -5, -3,
-          0, 3, 4, 5, 5, 5, 5, 5, 5, 5, 5, 4.5, 4.5, 4.5, 4.5, 4.5, 4, 4, 4, 4, 4, 3.5, 3.5, 3.5, 3.5, 3.5, 3, 3,
-          3, 2.5, 2.5, 2.5, 2, 2, 2, 1.5, 1.5, 1.5, 1.5, 1, 1, 1, 1, .5, .5, .5, .5];
+        case "sinus":
+          this.complexParts = [
+            -1, -4, -7, -4, 0, 0, 0, 1, -55, 3, 1, 0, 0, 0, -3, -5, -7, -7, -5,
+            -3, 0, 3, 4, 5, 5, 5, 5, 5, 5, 5, 5, 4.5, 4.5, 4.5, 4.5, 4.5, 4, 4,
+            4, 4, 4, 3.5, 3.5, 3.5, 3.5, 3.5, 3, 3, 3, 2.5, 2.5, 2.5, 2, 2, 2,
+            1.5, 1.5, 1.5, 1.5, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5,
+          ];
           break;
-        case "afib": this.complexParts = [-1, 3, -2, 2, 0, 3, -3, 1, -55, 3, -3, 2, 3, 1, -4, -5, -7, -5, -2, -3];
+        case "afib":
+          this.complexParts = [
+            -1, 3, -2, 2, 0, 3, -3, 1, -55, 3, -3, 2, 3, 1, -4, -5, -7, -5, -2,
+            -3,
+          ];
           for (let i = 0; i < 60; i++) {
             this.complexParts.push(Math.floor(Math.random() * 7) - 3.5);
           }
           break;
         case "vtach":
           let r1 = Math.random() * 2.5 - 1.25;
-          let r2 = Math.random() * 1 - .5;
-          this.complexParts = [-3 + r2, -9 + r2, -16 + r1, -23 + r2, -30 + r1, -37 + r2, -45 + r1, -51 + r2, -58 + r1,
-          -62 + r2, -65 + r1, -61 + r2, -57 + r1, -50 + r2, -45 + r1, -39 + r2, -25 + r1, -10 + r2, -2 + r1, 3 + r2,
-          4 + r1, 4 + r2, 5 + r1, 4 + r2, 4 + r1, 2 + r2];
+          let r2 = Math.random() * 1 - 0.5;
+          this.complexParts = [
+            -3 + r2,
+            -9 + r2,
+            -16 + r1,
+            -23 + r2,
+            -30 + r1,
+            -37 + r2,
+            -45 + r1,
+            -51 + r2,
+            -58 + r1,
+            -62 + r2,
+            -65 + r1,
+            -61 + r2,
+            -57 + r1,
+            -50 + r2,
+            -45 + r1,
+            -39 + r2,
+            -25 + r1,
+            -10 + r2,
+            -2 + r1,
+            3 + r2,
+            4 + r1,
+            4 + r2,
+            5 + r1,
+            4 + r2,
+            4 + r1,
+            2 + r2,
+          ];
           break;
       }
     } else if (this.complexParts.length > 0) {
@@ -167,14 +200,16 @@ class Ecg {
       this.baselineWanderDirection = 1;
     }
     if (this.baselineWanderDirection == 1) {
-      this.baselineWander += .01;
+      this.baselineWander += 0.01;
     } else if (this.baselineWanderDirection == 0) {
-      this.baselineWander -= .01;
+      this.baselineWander -= 0.01;
     }
     return this.baselineWander;
   }
 
-  draw(y) {
+  draw(y: number) {
+    if (!c || !canvas) return;
+
     c.fillStyle = "#000";
     c.fillRect(this.lineX, 0, 20, canvas.height);
     c.fill();
@@ -189,20 +224,23 @@ class Ecg {
 }
 
 const canvas = document.querySelector("canvas");
-const c = canvas.getContext("2d");
+const c = canvas?.getContext("2d");
 
-canvas.width = window.innerWidth > 1000 ? 1000 : window.innerWidth;
-canvas.height = 200;
+if (c && canvas) {
+  canvas.width = window.innerWidth > 1000 ? 1000 : window.innerWidth;
+  canvas.height = 200;
 
-c.fillStyle = "#000"; c.fillRect(0, 0, canvas.width, canvas.height);
-c.fill();
-
-const ecg = new Ecg();
-let paused = false;
-
-animate = () => {
-  requestAnimationFrame(animate);
-  if (!paused) ecg.update();
+  c.fillStyle = "#000";
+  c.fillRect(0, 0, canvas.width, canvas.height);
+  c.fill();
 }
+
+const _ecg = new Ecg_();
+let _paused = false;
+
+const animate = () => {
+  requestAnimationFrame(animate);
+  if (!_paused) _ecg.update();
+};
 
 animate();

@@ -1,125 +1,139 @@
 * {
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    color: #333;
-}
-body {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 40px;
-    background-color: rgb(217, 227, 217);
-}
-#wrapper {
-    position: relative;
-    background-color: #fff;
-}
-canvas, #controls {
-    max-width: 1000px;
-}
-#pauseBtn {
-    position: absolute;
-    display: block;
-    width: 24px;
-    height: 24px;
-    top: 10px;
-    right: 10px;
-    padding: 0;
-    border: 1px solid #777;
-    border-radius: 2px;
-    background-color: rgba(0,0,0,0);
-    cursor: pointer;
-}
-#pauseBtn:before, #pauseBtn:after {
-    position: absolute;
-    content: "";
-    width: 4px;
-    height: 12px;
-    top: 5px;
-    left: 6px;
-    background-color: #777;
-}
-#pauseBtn:after {
-    left: 13px;
-}
-#pauseBtn:hover {
-    border-color: #aaa;
-}
-#pauseBtn:hover:before, #pauseBtn:hover:after {
-    background-color: #aaa;
-}
-#pauseBtn.active {
-    border-color: #1b9cdd;
-}
-#pauseBtn.active:before, #pauseBtn.active:after {
-    background-color: #1b9cdd;
-}
-#controls {
-    display: flex;
-    justify-content: space-around;
-    gap: 40px;
-    margin: 40px;
-}
-#controls > section {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-grow: 1;
-}
-#controls > section:last-child {
-    flex-grow: .3;
-}
-#controls > section > h2, #controls > section > div {
-    position: relative;
-    width: 100%;
-    align-items: flex-start;
-}
-#controls > section > h2 {
-    margin-bottom: 20px;
-    font-size: 1.5em;
-    cursor: default;
-    user-select: none;
-}
-#controls > section > div > label {
-    display: inline-block;
-    width: 100%;
-    line-height: 35px;
-    user-select: none;
-}
-input[type=radio], input[type=checkbox] {
-    position: absolute;
-    left: 250px;
-    vertical-align: middle;
-    height: 100%;
-}
-#hr {
-    position: relative;
-    width: 100px;
-    padding: 10px;
-    font-weight: bold;
-    font-size: 1.1em;
-    color: #555;
-    border: 2px solid #e6e6e6;
-    transition: .05s all ease-out;
-}
-#hr:focus {
-    border: 2px solid #8bdd8d;
-}
-#hr::selection {
-    background: #9bdc9d;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
 }
 
+body {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 40px;
+  background-color: rgb(217, 227, 217);
+}
+body #wrapper {
+  position: relative;
+  background-color: #fff;
+}
+body #wrapper #pauseBtn {
+  position: absolute;
+  display: block;
+  width: 24px;
+  height: 24px;
+  top: 10px;
+  right: 10px;
+  padding: 0;
+  border: 1px solid #777;
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+}
+body #wrapper #pauseBtn:before, body #wrapper #pauseBtn:after {
+  position: absolute;
+  content: "";
+  width: 4px;
+  height: 12px;
+  top: 5px;
+  left: 6px;
+  background-color: #777;
+}
+body #wrapper #pauseBtn:after {
+  left: 13px;
+}
+body #wrapper #pauseBtn:hover {
+  border-color: #aaa;
+}
+body #wrapper #pauseBtn:hover:before, body #wrapper #pauseBtn:hover:after {
+  background-color: #aaa;
+}
+body #wrapper #pauseBtn.active {
+  border-color: #1b9cdd;
+}
+body #wrapper #pauseBtn.active:before, body #wrapper #pauseBtn.active:after {
+  background-color: #1b9cdd;
+}
+body #wrapper canvas,
+body #wrapper #controls {
+  max-width: 1000px;
+}
+body #wrapper #controls {
+  display: flex;
+  justify-content: space-around;
+  gap: 40px;
+  margin: 40px;
+}
+body #wrapper #controls > section {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+body #wrapper #controls > section:last-child {
+  flex-grow: 0.3;
+}
+body #wrapper #controls > section > h2, body #wrapper #controls > section > div {
+  position: relative;
+  width: 100%;
+  align-items: flex-start;
+}
+body #wrapper #controls > section > h2 > label, body #wrapper #controls > section > div > label {
+  display: inline-block;
+  width: 100%;
+  line-height: 35px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+       user-select: none;
+}
 @media only screen and (max-width: 900px) {
-    #controls > section > div > label {
-        display: inline;
-    }
-    input[type=radio], input[type=checkbox] {
-        position: relative;
-        left: 0;
-        margin-left: 20px;
-    }
+  body #wrapper #controls > section > h2 > label, body #wrapper #controls > section > div > label {
+    display: inline;
   }
+}
+body #wrapper #controls > section > h2 input[type=radio],
+body #wrapper #controls > section > h2 input[type=checkbox], body #wrapper #controls > section > div input[type=radio],
+body #wrapper #controls > section > div input[type=checkbox] {
+  position: absolute;
+  left: 250px;
+  vertical-align: middle;
+  height: 100%;
+}
+@media only screen and (max-width: 900px) {
+  body #wrapper #controls > section > h2 input[type=radio],
+  body #wrapper #controls > section > h2 input[type=checkbox], body #wrapper #controls > section > div input[type=radio],
+  body #wrapper #controls > section > div input[type=checkbox] {
+    position: relative;
+    left: 0;
+    margin-left: 20px;
+  }
+}
+body #wrapper #controls > section > h2 #hr, body #wrapper #controls > section > div #hr {
+  position: relative;
+  width: 100px;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #555;
+  border: 2px solid #e6e6e6;
+  transition: 0.05s all ease-out;
+}
+body #wrapper #controls > section > h2 #hr:focus, body #wrapper #controls > section > div #hr:focus {
+  border: 2px solid #8bdd8d;
+}
+body #wrapper #controls > section > h2 #hr::-moz-selection, body #wrapper #controls > section > div #hr::-moz-selection {
+  background: #9bdc9d;
+}
+body #wrapper #controls > section > h2 #hr::selection, body #wrapper #controls > section > div #hr::selection {
+  background: #9bdc9d;
+}
+body #wrapper #controls > section > h2 {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+       user-select: none;
+}/*# sourceMappingURL=main.css.map */

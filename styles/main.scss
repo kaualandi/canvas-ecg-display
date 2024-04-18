@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+body {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 40px;
+  background-color: rgb(217, 227, 217);
+
+  #wrapper {
+    position: relative;
+    background-color: #fff;
+
+    #pauseBtn {
+      position: absolute;
+      display: block;
+      width: 24px;
+      height: 24px;
+      top: 10px;
+      right: 10px;
+      padding: 0;
+      border: 1px solid #777;
+      border-radius: 2px;
+      background-color: rgba(0, 0, 0, 0);
+      cursor: pointer;
+
+      &:before,
+      &:after {
+        position: absolute;
+        content: "";
+        width: 4px;
+        height: 12px;
+        top: 5px;
+        left: 6px;
+        background-color: #777;
+      }
+      &:after {
+        left: 13px;
+      }
+      &:hover {
+        border-color: #aaa;
+        &:before,
+        &:after {
+          background-color: #aaa;
+        }
+      }
+      &.active {
+        border-color: #1b9cdd;
+
+        &:before,
+        &:after {
+          background-color: #1b9cdd;
+        }
+      }
+    }
+
+    canvas,
+    #controls {
+      max-width: 1000px;
+    }
+
+    #controls {
+      display: flex;
+      justify-content: space-around;
+      gap: 40px;
+      margin: 40px;
+
+      & > section {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
+        flex-grow: 1;
+
+        &:last-child {
+          flex-grow: 0.3;
+        }
+        & > h2,
+        & > div {
+          position: relative;
+          width: 100%;
+          align-items: flex-start;
+
+          & > label {
+            display: inline-block;
+            width: 100%;
+            line-height: 35px;
+            -webkit-user-select: none;
+            user-select: none;
+
+            @media only screen and (max-width: 900px) {
+              display: inline;
+            }
+          }
+
+          input[type="radio"],
+          input[type="checkbox"] {
+            position: absolute;
+            left: 250px;
+            vertical-align: middle;
+            height: 100%;
+
+            @media only screen and (max-width: 900px) {
+              position: relative;
+              left: 0;
+              margin-left: 20px;
+            }
+          }
+          #hr {
+            position: relative;
+            width: 100px;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #555;
+            border: 2px solid #e6e6e6;
+            transition: 0.05s all ease-out;
+            &:focus {
+              border: 2px solid #8bdd8d;
+            }
+            &::selection {
+              background: #9bdc9d;
+            }
+          }
+        }
+        & > h2 {
+          margin-bottom: 20px;
+          font-size: 1.5em;
+          cursor: default;
+          -webkit-user-select: none;
+          user-select: none;
+        }
+      }
+    }
+  }
+}
